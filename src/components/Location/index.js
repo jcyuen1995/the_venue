@@ -13,7 +13,7 @@ const containerStyle = {
     width: '100%', 
     height:'500px'
 }
-const mykey = myConfig.MY_KEY;
+const myKey = myConfig.MY_KEY;
 
 
 
@@ -108,5 +108,5 @@ class index extends Component {
 }
 
 export default GoogleApiWrapper({
-        apiKey: 'AIzaSyAgiFeOk6oLPqAt5FkSGtAX5W_7KRKSkOM'
+        apiKey: `${myKey}`
     })(index);
