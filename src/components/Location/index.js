@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
+import { myConfig } from '../../config';
 
 const mapStyles = {
     width: '100%',
@@ -12,6 +13,8 @@ const containerStyle = {
     width: '100%', 
     height:'500px'
 }
+const mykey = myConfig.MY_KEY;
+
 
 
 class index extends Component {

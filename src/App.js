@@ -9,8 +9,10 @@ import Highlights from './components/Highlights';
 import Pricing from './components/Pricing';
 import Location from './components/Location';
 import Footer from './components/header_footer/Footer';
+import { myConfig } from './config';
 
-const myKey = 'FeCkM4AOvKl36vGF';
+const myKey = myConfig.KEY_2;
+
 
 class App extends Component {
 
