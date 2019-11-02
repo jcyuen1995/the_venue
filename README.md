@@ -22,7 +22,7 @@ export const myConfig = {
     }
 ```
 
-### About 
+## About 
 Demonstrates: 
 - react JS knowledge
 - npm and node module knowledge
