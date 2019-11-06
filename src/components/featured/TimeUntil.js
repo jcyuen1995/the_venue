@@ -10,14 +10,15 @@ class TimeUntil extends Component {
             minutes: 0,
             hours: 0,
             days: 0,
-            deadline: this.props.time.deadline
+            deadline: this.props.time
         };    
-        console.log(this.props.time.deadline)
     }
     
 
-    async componentDidMount() {
-        setInterval( () =>  this.getTimeUntil(this.state.deadline), 1000)
+    componentDidMount() {
+        setInterval( () =>  
+        this.getTimeUntil(this.state.deadline)
+        , 1000)      
     }
 
     getTimeUntil (deadline) {
@@ -27,7 +28,7 @@ class TimeUntil extends Component {
         } else {
             const seconds = Math.floor((time/1000)%60);
             const minutes = Math.floor((time/1000/60)%60);
-            const hours = Math.floor(((time/(1000*60*60))%24)-1);
+            const hours = Math.floor(((time/(1000*60*60))%24));
             const days = Math.floor(time/(1000*60*60*24));
 
             this.setState({

@@ -22,7 +22,7 @@ class Header extends Component {
         this.state = {
             drawerOpen: false,
             headerShow: false,
-            fromChild: ''
+            query:''
         };
     }
 
@@ -55,7 +55,7 @@ class Header extends Component {
     handleChange = (e) => {
         if(e.keyCode === 13){
             this.setState({query: e.target.value})
-            this.props.q(this.state.query)
+            this.props.searched(this.state.query)
         } else {
         this.setState({ query: e.target.value });
         }
@@ -78,7 +78,6 @@ class Header extends Component {
                         <div className="header_logo_title">Countdown</div>
                     </div>
                     <div style = {searchStyle}>
-                        
                         <InputBase
                             placeholder= "Search…"
                             inputProps= {{ 
@@ -90,14 +89,14 @@ class Header extends Component {
                             onKeyDown = {this.handleChange}
                         >
                         </InputBase>
+                        <IconButton
+                            aria-label="Search"
+                            color = "inherit"
+                            onClick = {this.handleChange}
+                        >
+                            <SearchIcon/>
+                        </IconButton>
                     </div>
-                    <IconButton
-                        aria-label="Search"
-                        color = "inherit"
-                        onClick = {this.handleChange}
-                    >
-                        <SearchIcon/>
-                    </IconButton>
                     <IconButton
                         aria-label="Menu"
                         color="inherit"

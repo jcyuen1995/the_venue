@@ -19,34 +19,49 @@ class App extends Component {
   state = {
     items: [],
     didLoad: false,
-    query: null
+    query: "ariana grande",
+    names: []
   }
 
-  async grabArtistInfo() {
-    const url = `https://api.songkick.com/api/3.0/artists/4971683/calendar.json?apikey=${myKey}`
+  async grabArtistInfo(artistSearched) {
+    const artistSearch = `${artistSearched}`
+    const url = `https://api.songkick.com/api/3.0/artists/${artistSearch}/calendar.json?apikey=${myKey}`
     const response =  await fetch(url);
     const data = await response.json();
     this.setState({items:data, didLoad:true});
-    console.log(this.state.items)
   }
+
 
   async componentDidMount() {
-    this.grabArtistInfo()   
+    await this.getSearchedName(this.state.query)
   }
 
-  getArtistName = (artist) => {
-    this.setState({query: artist});
-    console.log(this.state.query);
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.items !== nextState.items){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  async getSearchedName(artist){
+    const  searchUrl = `https://api.songkick.com/api/3.0/search/artists.json?apikey=${myKey}&query=${artist}`
+    const response = await fetch(searchUrl);
+    const data = await response.json();
+    this.setState({names: data, query: artist})
+    this.grabArtistInfo(this.state.names.resultsPage.results.artist[0].id)
   }
 
   render() {
-    if (this.state.didLoad === true) {
+      if (this.state.didLoad === true) {
       return (
         <div className="App">
-          <Header q = {(artist) => this.getArtistName(artist)} />
+          <Header searched = {(artist) => this.getSearchedName(artist)} />
           <Element name = 'Featured'>
             <Featured 
-              deadline = {this.state.items.resultsPage.results.event[0].start.datetime}
+              deadline = {(this.state.items.resultsPage.results.event[0].start.datetime)}
+              name = {(this.state.items.resultsPage.results.event[0].performance[0].displayName)}
             />
           </Element>
           <Element name = "Venue_info">
